@@ -9,6 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const port = process.env.PORT || 5000;
 const subscriptionKey = process.env.AZURE_KEY;
 const region = process.env.AZURE_REGION || "centralindia";
 const endpoint = "https://api.cognitive.microsofttranslator.com/translate";
@@ -94,6 +95,10 @@ app.post("/translate", async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log("✅ Backend running on http://localhost:5000");
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
+app.get("/", (req, res) => {
+  res.send("Translator Chatbot API is running");
 });
